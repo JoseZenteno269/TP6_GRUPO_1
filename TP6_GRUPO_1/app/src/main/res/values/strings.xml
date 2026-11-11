@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">TP6_GRUPO_1</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="item_agregar_contactos">Agregar Contactos</string>
+    <string name="item_listado_de_contactos">Listado de Contactos</string>
+    <string name="title">FORMULARIO DE CONTACTO</string>
+    <string name="bt_continuar">CONTINUAR</string>
+    <string name="texto">Este es un formulario destinado al registro de personas, sus datos personales e interese.</string>
+    <string name="texto_secundario">A continuación, por favor se piden completar más datos personales.</string>
+    <string name="btn_guardar">GUARDAR</string>
+    <string name="Nombre">NOMBRE</string>
+    <string name="Hint_nombre">Nombre</string>
+    <string name="Apellido">APELLIDO</string>
+    <string name="Hint_apellido">Apellido</string>
 </resources>
