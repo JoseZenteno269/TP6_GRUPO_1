@@ -11,4 +11,6 @@
     <string name="Hint_nombre">Nombre</string>
     <string name="Apellido">APELLIDO</string>
     <string name="Hint_apellido">Apellido</string>
+    <string name="telefono">Telefono</string>
+    <string name="hint_telefono">Telefono</string>
 </resources>
