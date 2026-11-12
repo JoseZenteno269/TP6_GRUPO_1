@@ -13,4 +13,6 @@
     <string name="Hint_apellido">Apellido</string>
     <string name="telefono">Telefono</string>
     <string name="hint_telefono">Telefono</string>
+    <string name="mail">Mail</string>
+    <string name="hint_mail">Mail</string>
 </resources>

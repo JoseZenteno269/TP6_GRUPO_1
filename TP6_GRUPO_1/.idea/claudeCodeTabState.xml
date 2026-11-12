@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ClaudeCodeTabState">
+    <option name="tabSessions">
+      <map>
+        <entry key="0">
+          <value>
+            <TabSessionState>
+              <option name="projectPath" value="C:\Users\dream\Desktop\progra4\TP6_GRUPO_1\TP6_GRUPO_1" />
+              <option name="provider" value="claude" />
+              <option name="sessionId" value="229a5664-8db0-4a74-99b7-da3c1d89797a" />
+              <option name="cwd" value="C:\Users\dream\Desktop\progra4\TP6_GRUPO_1\TP6_GRUPO_1" />
+              <option name="model" value="claude-sonnet-5[1m]" />
+              <option name="permissionMode" value="default" />
+            </TabSessionState>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
