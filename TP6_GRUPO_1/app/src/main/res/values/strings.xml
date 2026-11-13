@@ -15,4 +15,8 @@
     <string name="hint_telefono">Telefono</string>
     <string name="mail">Mail</string>
     <string name="hint_mail">Mail</string>
+    <string name="direccion">DIRECCION</string>
+    <string name="hint_direccion">Direccion</string>
+    <string name="fecha_nacimiento">FECHA DE NACIMIENTO</string>
+    <string name="hint_fecha_nacimiento">Fecha nacimiento</string>
 </resources>
