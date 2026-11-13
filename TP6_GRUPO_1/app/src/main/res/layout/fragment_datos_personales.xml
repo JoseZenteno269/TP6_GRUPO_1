@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView_fomulario"
+            android:id="@+id/textView_formulario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -154,11 +154,11 @@
             android:inputType="date" />
 
         <Button
-            android:id="@+id/btn_Continuar"
+            android:id="@+id/btn_continuar"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:text="Continuar"
+            android:text="@string/bt_continuar"
             android:textSize="16sp" />
     </LinearLayout>
 </ScrollView>
