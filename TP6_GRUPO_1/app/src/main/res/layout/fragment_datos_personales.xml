@@ -153,6 +153,11 @@
             android:hint="@string/hint_fecha_nacimiento"
             android:inputType="date" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/btn_continuar"
             android:layout_width="140dp"
@@ -160,5 +165,15 @@
             android:layout_marginRight="20dp"
             android:text="@string/bt_continuar"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txvError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16dp"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

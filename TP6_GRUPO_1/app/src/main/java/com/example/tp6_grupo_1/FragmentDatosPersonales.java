@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ public class FragmentDatosPersonales extends Fragment {
     private EditText txtNombre, txtApellido, txtTelefono, txtMail, txtDireccion, txtFechaNacimiento;
     private Spinner spinnerTelefono, spinnerMail;
     private Button btnContinuar;
+    private TextView txvError;
     public FragmentDatosPersonales() {
 
     }
@@ -67,5 +69,27 @@ public class FragmentDatosPersonales extends Fragment {
         spinnerMail.setAdapter(adapterMail);
 
         return view;
+    }
+
+    private boolean validaciones(){
+        boolean estado = true;
+        txtNombre.setError(null);
+        txtApellido.setError(null);
+        txtTelefono.setError(null);
+
+        if (txtNombre.getText().toString().isEmpty()){
+            txtNombre.setError("Campo requerido");
+            estado = false;
+        }
+        if (txtApellido.getText().toString().isEmpty()){
+            txtApellido.setError("Campo requerido");
+            estado = false;
+        }
+        if (txtTelefono.getText().toString().isEmpty()){
+            txtTelefono.setError("Campo requerido");
+            estado = false;
+        }
+
+        return estado;
     }
 }
