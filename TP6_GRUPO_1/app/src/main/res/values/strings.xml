@@ -19,4 +19,9 @@
     <string name="hint_direccion">Direccion</string>
     <string name="fecha_nacimiento">FECHA DE NACIMIENTO</string>
     <string name="hint_fecha_nacimiento">Fecha nacimiento</string>
+    <string name="error_campo_requerido">Campo requerido</string>
+    <string name="error_mail_invalido">Mail invalido</string>
+    <string name="error_fecha_futura">La fecha no puede ser futura</string>
+    <string name="error_fecha_formato">Use el formato dd/mm/aaaa</string>
+    <string name="formato_fecha">dd/MM/uuuu</string>
 </resources>

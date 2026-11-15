@@ -13,6 +13,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 
 import Entidad.Tipo;
@@ -23,6 +27,7 @@ public class FragmentDatosPersonales extends Fragment {
     private Spinner spinnerTelefono, spinnerMail;
     private Button btnContinuar;
     private TextView txvError;
+    private ArrayList<Tipo> listaTipos;
     public FragmentDatosPersonales() {
 
     }
@@ -88,6 +93,38 @@ public class FragmentDatosPersonales extends Fragment {
         if (txtTelefono.getText().toString().isEmpty()){
             txtTelefono.setError("Campo requerido");
             estado = false;
+        }
+        String mail = txtMail.getText().toString().trim();
+        if (mail.isEmpty()){
+            txtMail.setError(getString(R.string.error_campo_requerido));
+            estado = false;
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(mail).matches()){
+            txtMail.setError(getString(R.string.error_mail_invalido));
+            estado = false;
+        }
+
+        if (txtDireccion.getText().toString().trim().isEmpty()){
+            txtDireccion.setError(getString(R.string.error_campo_requerido));
+            estado = false;
+        }
+        String fecha = txtFechaNacimiento.getText().toString().trim();
+        if (fecha.isEmpty()){
+            txtFechaNacimiento.setError(getString(R.string.error_campo_requerido));
+            estado = false;
+        } else {
+            DateTimeFormatter formato = DateTimeFormatter
+                    .ofPattern(getString(R.string.formato_fecha))
+                    .withResolverStyle(ResolverStyle.STRICT);
+            try {
+                LocalDate fechaNac = LocalDate.parse(fecha, formato);
+                if (fechaNac.isAfter(LocalDate.now())){
+                    txtFechaNacimiento.setError(getString(R.string.error_fecha_futura));
+                    estado = false;
+                }
+            } catch (DateTimeParseException e) {
+                txtFechaNacimiento.setError(getString(R.string.error_fecha_formato));
+                estado = false;
+            }
         }
 
         return estado;
