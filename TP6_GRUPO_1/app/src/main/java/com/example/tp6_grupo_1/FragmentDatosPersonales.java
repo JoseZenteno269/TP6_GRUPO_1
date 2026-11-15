@@ -18,16 +18,22 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.ArrayList;
+import java.util.Date;
 
+import Entidad.Contacto;
 import Entidad.Tipo;
 
 public class FragmentDatosPersonales extends Fragment {
 
     private EditText txtNombre, txtApellido, txtTelefono, txtMail, txtDireccion, txtFechaNacimiento;
     private Spinner spinnerTelefono, spinnerMail;
-    private Button btnContinuar;
     private TextView txvError;
     private ArrayList<Tipo> listaTipos;
+
+    private Button btn_continuar;
+
+    DateTimeFormatter formato;
+
     public FragmentDatosPersonales() {
 
     }
@@ -56,22 +62,22 @@ public class FragmentDatosPersonales extends Fragment {
         txtFechaNacimiento = view.findViewById(R.id.txt_fecha_nacimiento);
         spinnerTelefono = view.findViewById(R.id.spinner_telefono);
         spinnerMail = view.findViewById(R.id.spinner_mail);
-        btnContinuar = view.findViewById(R.id.btn_continuar);
+        btn_continuar = view.findViewById(R.id.btn_continuar);
 
         listaTipos = new ArrayList<>();
         listaTipos.add(new Tipo("Casa"));
         listaTipos.add(new Tipo("Trabajo"));
         listaTipos.add(new Tipo("Móvil"));
 
-        ArrayAdapter<Tipo> adapterTelefono = new ArrayAdapter<>(
-                requireContext(), android.R.layout.simple_spinner_item, listaTipos);
-        adapterTelefono.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTelefono.setAdapter(adapterTelefono);
+        btn_continuar = view.findViewById(R.id.btn_continuar);
 
-        ArrayAdapter<Tipo> adapterMail = new ArrayAdapter<>(
-                requireContext(), android.R.layout.simple_spinner_item, listaTipos);
-        adapterMail.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerMail.setAdapter(adapterMail);
+        ArrayAdapter<Tipo> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, listaTipos);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinnerTelefono.setAdapter(adapter);
+        spinnerMail.setAdapter(adapter);
+
+        btn_continuar.setOnClickListener(v -> continuar());
 
         return view;
     }
@@ -81,20 +87,58 @@ public class FragmentDatosPersonales extends Fragment {
         txtNombre.setError(null);
         txtApellido.setError(null);
         txtTelefono.setError(null);
+        txtMail.setError(null);
+        txtDireccion.setError(null);
+        txtFechaNacimiento.setError(null);
 
-        if (txtNombre.getText().toString().isEmpty()){
-            txtNombre.setError("Campo requerido");
-            estado = false;
-        }
-        if (txtApellido.getText().toString().isEmpty()){
-            txtApellido.setError("Campo requerido");
-            estado = false;
-        }
-        if (txtTelefono.getText().toString().isEmpty()){
-            txtTelefono.setError("Campo requerido");
-            estado = false;
-        }
+        String nombre = txtNombre.getText().toString().trim();
+        String apellido = txtApellido.getText().toString().trim();
+        String telefono = txtTelefono.getText().toString().trim();
         String mail = txtMail.getText().toString().trim();
+        String direccion = txtDireccion.getText().toString().trim();
+        String fecha = txtFechaNacimiento.getText().toString().trim();
+
+        if (nombre.isEmpty()){
+            txtNombre.setError(getString(R.string.error_campo_requerido));
+            estado = false;
+        }
+        else if(nombre.length() < 3){
+            txtNombre.setError("Minimo de 3 caracteres");
+            estado = false;
+        }
+        else if(!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+")){
+            txtNombre.setError("Solo se permiten letras");
+            estado = false;
+        }
+
+
+        if (apellido.isEmpty()){
+            txtApellido.setError(getString(R.string.error_campo_requerido));
+            estado = false;
+        }
+        else if(apellido.length() < 3){
+            txtApellido.setError("Minimo de 3 caracteres");
+            estado = false;
+        }
+        else if(!apellido.matches("[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+")){
+            txtApellido.setError("Solo se permiten letras");
+            estado = false;
+        }
+
+
+        if (telefono.isEmpty()){
+            txtTelefono.setError(getString(R.string.error_campo_requerido));
+            estado = false;
+        }
+        else if(!telefono.matches("[0-9-]+")){
+            txtTelefono.setError("Solo numeros y guion");
+            estado = false;
+        }
+        else if(telefono.replace("-", "").length() != 10){
+            txtTelefono.setError("Debe de contener 10 digitos");
+            estado = false;
+        }
+
         if (mail.isEmpty()){
             txtMail.setError(getString(R.string.error_campo_requerido));
             estado = false;
@@ -103,16 +147,16 @@ public class FragmentDatosPersonales extends Fragment {
             estado = false;
         }
 
-        if (txtDireccion.getText().toString().trim().isEmpty()){
+        if (direccion.isEmpty()){
             txtDireccion.setError(getString(R.string.error_campo_requerido));
             estado = false;
         }
-        String fecha = txtFechaNacimiento.getText().toString().trim();
+
         if (fecha.isEmpty()){
             txtFechaNacimiento.setError(getString(R.string.error_campo_requerido));
             estado = false;
         } else {
-            DateTimeFormatter formato = DateTimeFormatter
+            formato = DateTimeFormatter
                     .ofPattern(getString(R.string.formato_fecha))
                     .withResolverStyle(ResolverStyle.STRICT);
             try {
@@ -128,5 +172,29 @@ public class FragmentDatosPersonales extends Fragment {
         }
 
         return estado;
+    }
+
+    public void continuar() {
+        if(!validaciones()){
+            return;
+        }
+
+        Contacto contacto = new Contacto();
+        contacto.setNombre(txtNombre.getText().toString().trim());
+        contacto.setApellido(txtApellido.getText().toString().trim());
+        contacto.setTelefono(txtTelefono.getText().toString().trim());
+        contacto.setTipo_telefono(spinnerTelefono.getSelectedItem().toString().trim());
+        contacto.setEmail(txtMail.getText().toString().trim());
+        contacto.setTipo_mail(spinnerMail.getSelectedItem().toString().trim());
+        contacto.setDireccion(txtDireccion.getText().toString().trim());
+        contacto.setFechaNacimiento(LocalDate.parse(txtFechaNacimiento.getText().toString().trim(), formato));
+
+        Bundle datos = new Bundle();
+        datos.putSerializable("contacto", contacto);
+
+        FragmentInteresEstudio fragment2 = new FragmentInteresEstudio();
+        fragment2.setArguments(datos);
+
+        getParentFragmentManager().beginTransaction().replace(R.id.main, fragment2).addToBackStack(null).commit();
     }
 }

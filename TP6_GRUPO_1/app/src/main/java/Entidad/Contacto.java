@@ -1,8 +1,10 @@
 package Entidad;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
-public class Contacto {
+public class Contacto implements Serializable {
 
     public Contacto()
     {
@@ -11,9 +13,11 @@ public class Contacto {
     private String nombre;
     private String apellido;
     private String telefono;
+    private String tipo_telefono;
     private String email;
+    private String tipo_mail;
     private String direccion;
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
 
     public String getNombre() {
@@ -56,11 +60,27 @@ public class Contacto {
         this.direccion = direccion;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getTipo_telefono() {
+        return tipo_telefono;
+    }
+
+    public void setTipo_telefono(String tipo_telefono) {
+        this.tipo_telefono = tipo_telefono;
+    }
+
+    public String getTipo_mail() {
+        return tipo_mail;
+    }
+
+    public void setTipo_mail(String tipo_mail) {
+        this.tipo_mail = tipo_mail;
     }
 }
