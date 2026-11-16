@@ -24,4 +24,6 @@
     <string name="error_fecha_futura">La fecha no puede ser futura</string>
     <string name="error_fecha_formato">Use el formato dd/mm/aaaa</string>
     <string name="formato_fecha">dd/MM/uuuu</string>
+    <string name="titulo_notificacion">DESEA RECIBIR INFORMACION?</string>
+    <string name="texto_switch_notificacion">Si</string>
 </resources>
