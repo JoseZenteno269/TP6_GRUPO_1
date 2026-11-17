@@ -2,7 +2,9 @@ package Entidad;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Contacto implements Serializable {
 
@@ -18,6 +20,9 @@ public class Contacto implements Serializable {
     private String tipo_mail;
     private String direccion;
     private LocalDate fechaNacimiento;
+    private String estudios;
+    private List<String> interes = new ArrayList<>();
+    private boolean informacion;
 
 
     public String getNombre() {
@@ -82,5 +87,29 @@ public class Contacto implements Serializable {
 
     public void setTipo_mail(String tipo_mail) {
         this.tipo_mail = tipo_mail;
+    }
+
+    public String getEstudios() {
+        return estudios;
+    }
+
+    public void setEstudios(String estudios) {
+        this.estudios = estudios;
+    }
+
+    public List<String> getInteres() {
+        return interes;
+    }
+
+    public void setInteres(List<String> interes) {
+        this.interes = interes;
+    }
+
+    public boolean isInformacion() {
+        return informacion;
+    }
+
+    public void setInformacion(boolean informacion) {
+        this.informacion = informacion;
     }
 }
