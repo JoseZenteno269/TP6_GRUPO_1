@@ -9,9 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +26,7 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import Entidad.Contacto;
 import Entidad.Tipo;
@@ -31,6 +39,15 @@ public class FragmentDatosPersonales extends Fragment {
     private ArrayList<Tipo> listaTipos;
 
     private Button btn_continuar;
+
+    private RadioGroup radioGroup;
+
+    private CheckBox chkDeporte;
+    private CheckBox chkMusica;
+    private CheckBox chkArte;
+    private CheckBox chkTecnologia;
+    private Switch Info;
+
 
     DateTimeFormatter formato;
 
@@ -196,5 +213,89 @@ public class FragmentDatosPersonales extends Fragment {
         fragment2.setArguments(datos);
 
         getParentFragmentManager().beginTransaction().replace(R.id.main, fragment2).addToBackStack(null).commit();
+    }
+
+
+    private boolean ValidarIntereses()
+    {
+        boolean Estado = true;
+
+        int IdSeleccionado = radioGroup.getCheckedRadioButtonId();
+
+        if(IdSeleccionado == -1)
+        {
+            Toast.makeText(requireContext(), "Debe Seleccionar una opcion", Toast.LENGTH_LONG).show();
+            Estado = false;
+        }
+
+        if(!chkDeporte.isChecked() && chkArte.isChecked() && chkMusica.isChecked() && chkTecnologia.isChecked())
+        {
+            Toast.makeText(requireContext(), "Debe Seleccionar una Opcion", Toast.LENGTH_LONG).show();
+            Estado = false;
+        }
+
+        return Estado;
+    }
+
+    public void Guardar(View view) {
+
+
+        if(!ValidarIntereses())
+        {
+            return;
+        }
+
+        Contacto contacto = new Contacto();
+        List<String> Intereses = new ArrayList<>();
+
+        chkDeporte = view.findViewById(R.id.cb_Deporte);
+        chkMusica = view.findViewById(R.id.cb_Musica);
+        chkArte = view.findViewById(R.id.cb_Arte);
+        chkTecnologia = view.findViewById(R.id.cb_Tecnologia);
+        radioGroup = view.findViewById(R.id.Group_Niveles_Estudio);
+        Info = view.findViewById(R.id.sw_Notificacion);
+
+        Info.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
+            if(isChecked)
+            {
+                Info.setText("Si");
+            }
+            else
+            {
+                Info.setText("No");
+            }
+
+            Intereses.add(Info.getText().toString());
+
+        });
+
+        if(chkDeporte.isChecked())
+        {
+            Intereses.add(chkDeporte.getText().toString());
+        }
+        if(chkArte.isChecked())
+        {
+            Intereses.add(chkArte.getText().toString());
+        }
+        if(chkMusica.isChecked())
+        {
+            Intereses.add(chkMusica.getText().toString());
+        }
+        if(chkTecnologia.isChecked())
+        {
+            Intereses.add(chkTecnologia.getText().toString());
+        }
+
+        int IdSeleccionado = radioGroup.getCheckedRadioButtonId();
+
+        if(IdSeleccionado != -1)
+        {
+            RadioButton RB = view.findViewById(IdSeleccionado);
+            Intereses.add(RB.getText().toString());
+        }
+
+        contacto.setInteres(Intereses);
+
     }
 }
