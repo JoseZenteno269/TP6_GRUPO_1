@@ -26,4 +26,6 @@
     <string name="formato_fecha">dd/MM/uuuu</string>
     <string name="titulo_notificacion">DESEA RECIBIR INFORMACION?</string>
     <string name="texto_switch_notificacion">Si</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
