@@ -1,6 +1,9 @@
 package Negocio;
 
 import android.content.Context;
+
+import java.util.ArrayList;
+
 import Datos.DAOContacto;
 import Entidad.Contacto;
 
@@ -19,5 +22,9 @@ public class NegocioContacto {
         }
 
         return dao.insertar(contacto) != -1;
+    }
+
+    public ArrayList<Contacto> listar() {
+        return dao.listado();
     }
 }
