@@ -40,13 +40,6 @@ public class FragmentDatosPersonales extends Fragment {
 
     private Button btn_continuar;
 
-    private RadioGroup radioGroup;
-
-    private CheckBox chkDeporte;
-    private CheckBox chkMusica;
-    private CheckBox chkArte;
-    private CheckBox chkTecnologia;
-    private Switch Info;
 
 
     DateTimeFormatter formato;
@@ -216,86 +209,4 @@ public class FragmentDatosPersonales extends Fragment {
     }
 
 
-    private boolean ValidarIntereses()
-    {
-        boolean Estado = true;
-
-        int IdSeleccionado = radioGroup.getCheckedRadioButtonId();
-
-        if(IdSeleccionado == -1)
-        {
-            Toast.makeText(requireContext(), "Debe Seleccionar una opcion", Toast.LENGTH_LONG).show();
-            Estado = false;
-        }
-
-        if(!chkDeporte.isChecked() && chkArte.isChecked() && chkMusica.isChecked() && chkTecnologia.isChecked())
-        {
-            Toast.makeText(requireContext(), "Debe Seleccionar una Opcion", Toast.LENGTH_LONG).show();
-            Estado = false;
-        }
-
-        return Estado;
-    }
-
-    public void Guardar(View view) {
-
-
-        if(!ValidarIntereses())
-        {
-            return;
-        }
-
-        Contacto contacto = new Contacto();
-        List<String> Intereses = new ArrayList<>();
-
-        chkDeporte = view.findViewById(R.id.cb_Deporte);
-        chkMusica = view.findViewById(R.id.cb_Musica);
-        chkArte = view.findViewById(R.id.cb_Arte);
-        chkTecnologia = view.findViewById(R.id.cb_Tecnologia);
-        radioGroup = view.findViewById(R.id.Group_Niveles_Estudio);
-        Info = view.findViewById(R.id.sw_Notificacion);
-
-        Info.setOnCheckedChangeListener((buttonView, isChecked) -> {
-
-            if(isChecked)
-            {
-                Info.setText("Si");
-            }
-            else
-            {
-                Info.setText("No");
-            }
-
-            Intereses.add(Info.getText().toString());
-
-        });
-
-        if(chkDeporte.isChecked())
-        {
-            Intereses.add(chkDeporte.getText().toString());
-        }
-        if(chkArte.isChecked())
-        {
-            Intereses.add(chkArte.getText().toString());
-        }
-        if(chkMusica.isChecked())
-        {
-            Intereses.add(chkMusica.getText().toString());
-        }
-        if(chkTecnologia.isChecked())
-        {
-            Intereses.add(chkTecnologia.getText().toString());
-        }
-
-        int IdSeleccionado = radioGroup.getCheckedRadioButtonId();
-
-        if(IdSeleccionado != -1)
-        {
-            RadioButton RB = view.findViewById(IdSeleccionado);
-            Intereses.add(RB.getText().toString());
-        }
-
-        contacto.setInteres(Intereses);
-
-    }
 }

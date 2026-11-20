@@ -21,7 +21,7 @@ public class Contacto implements Serializable {
     private String direccion;
     private LocalDate fechaNacimiento;
     private String estudios;
-    private List<String> interes = new ArrayList<>();
+    private String interes;
     private boolean informacion;
 
 
@@ -97,15 +97,15 @@ public class Contacto implements Serializable {
         this.estudios = estudios;
     }
 
-    public List<String> getInteres() {
+    public String getInteres() {
         return interes;
     }
 
-    public void setInteres(List<String> interes) {
+    public void setInteres(String interes) {
         this.interes = interes;
     }
 
-    public boolean isInformacion() {
+    public boolean getInformacion() {
         return informacion;
     }
 

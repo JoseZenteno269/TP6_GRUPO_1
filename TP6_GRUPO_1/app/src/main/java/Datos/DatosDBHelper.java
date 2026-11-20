@@ -35,8 +35,7 @@ public class DatosDBHelper extends SQLiteOpenHelper {
             + COLUMNA_FECHA_NACIMIENTO + " TEXT NOT NULL, "
             + COLUMNA_ESTUDIOS + " TEXT NOT NULL, "
             + COLUMNA_INTERES + " TEXT NOT NULL, "
-            + COLUMNA_INFORMACION + " INTEGER NOT NULL DEFAULT 0 CHECK ("
-            + COLUMNA_INFORMACION + " IN (0, 1)))";
+            + COLUMNA_INFORMACION + " INTEGER NOT NULL DEFAULT 0 CHECK (" + COLUMNA_INFORMACION + " IN (0, 1)))";
 
     public DatosDBHelper(Context context) {
         super(context, BASE_DE_DATOS, null, VERSION);
